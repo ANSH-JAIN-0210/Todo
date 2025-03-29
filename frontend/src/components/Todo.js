@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Todo.css';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = 'https://todo-s0tv.onrender.com/api/todo'; // Ensure correct API base URL
+
 const Todo = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
@@ -16,12 +18,13 @@ const Todo = () => {
           throw new Error('User not authenticated');
         }
 
-        const res = await axios.get('https://todo-s0tv.onrender.com/api/todo', {
+        const res = await axios.get(API_BASE_URL, {
           headers: { Authorization: `Bearer ${authData.token}` },
         });
         setTasks(res.data);
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching tasks:', err.response?.data?.message || err.message);
+        alert('Failed to fetch tasks. Please try again.');
       }
     };
     fetchTasks();
@@ -33,21 +36,20 @@ const Todo = () => {
       if (!authData || !authData.token) {
         throw new Error('User not authenticated');
       }
-  
+
       const res = await axios.post(
-        'https://todo-s0tv.onrender.com/api/todo',
+        API_BASE_URL,
         { task: newTask },
         { headers: { Authorization: `Bearer ${authData.token}` } }
       );
-  
+
       setNewTask('');
       setTasks((prevTasks) => [...prevTasks, res.data.todo]);
     } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || 'An error occurred');
+      console.error('Error adding task:', err.response?.data?.message || err.message);
+      alert('Failed to add task. Please try again.');
     }
   };
-  
 
   const handleDeleteTask = async (taskId) => {
     try {
@@ -55,19 +57,17 @@ const Todo = () => {
       if (!authData || !authData.token) {
         throw new Error('User not authenticated');
       }
-  
-      await axios.delete(`https://todo-s0tv.onrender.com/api/todo/${taskId}`, {
+
+      await axios.delete(`${API_BASE_URL}/${taskId}`, {
         headers: { Authorization: `Bearer ${authData.token}` },
       });
-  
+
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
     } catch (err) {
       console.error('Error deleting task:', err.response?.data?.message || err.message);
-      alert(err.response?.data?.message || 'An error occurred while deleting the task');
+      alert('Failed to delete task. Please try again.');
     }
   };
-  
-  
 
   const handleLogout = () => {
     localStorage.removeItem('authData');
