@@ -16,7 +16,7 @@ const Todo = () => {
           throw new Error('User not authenticated');
         }
 
-        const res = await axios.get('http://localhost:5000/api/todo', {
+        const res = await axios.get('https://todo-s0tv.onrender.com/api/todo', {
           headers: { Authorization: `Bearer ${authData.token}` },
         });
         setTasks(res.data);
