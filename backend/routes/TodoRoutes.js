@@ -3,7 +3,7 @@ const Todo = require('../models/todo');
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();
-const SECRET_KEY = '8882345228';
+const SECRET_KEY = process.env.JWT_SECRET || '8882345228';
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
