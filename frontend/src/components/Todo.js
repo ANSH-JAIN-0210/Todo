@@ -35,7 +35,7 @@ const Todo = () => {
       }
   
       const res = await axios.post(
-        'http://localhost:5000/api/todo',
+        'https://todo-s0tv.onrender.com/api/todo',
         { task: newTask },
         { headers: { Authorization: `Bearer ${authData.token}` } }
       );
@@ -56,7 +56,7 @@ const Todo = () => {
         throw new Error('User not authenticated');
       }
   
-      await axios.delete(`http://localhost:5000/api/todo/${taskId}`, {
+      await axios.delete(`https://todo-s0tv.onrender.com/api/todo/${taskId}`, {
         headers: { Authorization: `Bearer ${authData.token}` },
       });
   
