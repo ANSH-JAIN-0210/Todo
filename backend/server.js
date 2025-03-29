@@ -6,7 +6,13 @@ const userRoutes = require("./routes/UserRoutes");
 const todoRoutes = require("./routes/TodoRoutes");
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "https://todo-frontend-e4l4.onrender.com",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/todoApp', {
