@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://todo-frontend-e4l4.onrender.com/"
+    origin: "*",
   })
 );
 app.use(bodyParser.json());
