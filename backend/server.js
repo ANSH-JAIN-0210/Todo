@@ -9,9 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://todo-frontend-e4l4.onrender.com/",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
+    origin: "https://todo-frontend-e4l4.onrender.com/"
   })
 );
 app.use(bodyParser.json());
