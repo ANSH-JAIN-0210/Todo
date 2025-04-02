@@ -7,7 +7,7 @@ const todoRoutes = require("./routes/TodoRoutes");
 
 const app = express();
 const corsOptions = {
-  origin: "https://todo-frontend-e4l4.onrender.com",
+  origin: "*",
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization"
 };
