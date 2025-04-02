@@ -16,7 +16,9 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://todo-s0tv.onrender.com/api/signup', formData);
+      const res = await axios.post('https://todo-s0tv.onrender.com/api/signup', formData, {
+        headers: { 'Content-Type': 'application/json' }
+      });
       localStorage.setItem('authData', JSON.stringify({ token: res.data.token, expiry: Date.now() + 3 * 60 * 60 * 1000 }));
       navigate('/todo');
     } catch (err) {

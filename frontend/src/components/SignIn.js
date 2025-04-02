@@ -14,7 +14,9 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://todo-s0tv.onrender.com/api/signin', credentials);
+      const res = await axios.post('https://todo-s0tv.onrender.com/api/signin', credentials, {
+        headers: { 'Content-Type': 'application/json' }
+      });
       const tokenExpiry = new Date().getTime() + 3 * 60 * 60 * 1000;
       localStorage.setItem('authData', JSON.stringify({ token: res.data.token, expiry: tokenExpiry }));
       navigate('/todo');
